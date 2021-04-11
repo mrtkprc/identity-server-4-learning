@@ -25,12 +25,17 @@ namespace AuthServer
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "AuthServer", Version = "v1" });
             });
+
+            services.AddIdentityServer()
+                .AddInMemoryApiResources(Config.Config.GetApiResources())
+                .AddInMemoryApiScopes(Config.Config.GetApiScopes())
+                .AddInMemoryClients(Config.Config.GetClients())
+                .AddDeveloperSigningCredential();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,6 +50,7 @@ namespace AuthServer
 
             app.UseRouting();
 
+            app.UseIdentityServer(); //This should be preceded from UseAuthorization.
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
