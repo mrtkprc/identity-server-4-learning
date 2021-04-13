@@ -14,6 +14,7 @@ namespace GarantiAPI.Controllers
     public class GarantiBankController : ControllerBase
     {
         [HttpGet("{musteriId}")]
+        [Authorize(Policy = "ReadGaranti")]
         public double Bakiye(int musteriId)
         {
             return 1000;
@@ -27,6 +28,14 @@ namespace GarantiAPI.Controllers
                 "987654321",
                 "564738291"
             };
+        }
+
+        //If we don't have scope AllGaranti, returning http status code will be 403(forbidden), not 401
+        [HttpGet("{musteriId}/{tutar}")]
+        [Authorize(Policy = "AllGaranti")]
+        public double YatirimYap(int musteriId, double tutar)
+        {
+            return tutar * 0.5;
         }
     }
 }
