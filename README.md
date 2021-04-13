@@ -19,3 +19,6 @@ To retrieve acces token:
         "offline_access"
 ],
 
+## Introspect Endpoint
+
+Endpoint `/connect/introspect` can be used to see token status and scopes.
