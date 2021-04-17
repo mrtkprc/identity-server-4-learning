@@ -39,7 +39,7 @@ namespace HalkbankAPI.Controllers
         public async Task Sample(int musteriId)
         {
             HttpClient httpClient = new HttpClient();
-            DiscoveryDocumentResponse discovery = await httpClient.GetDiscoveryDocumentAsync("http://localhost:5000");
+            DiscoveryDocumentResponse discovery = await httpClient.GetDiscoveryDocumentAsync("https://localhost:5000");
             ClientCredentialsTokenRequest tokenRequest = new ClientCredentialsTokenRequest();
             tokenRequest.ClientId = "HalkBankasi";
             tokenRequest.ClientSecret = "halkbank";
@@ -48,7 +48,7 @@ namespace HalkbankAPI.Controllers
             TokenResponse tokenResponse = await httpClient.RequestClientCredentialsTokenAsync(tokenRequest);
             httpClient.SetBearerToken(tokenResponse.AccessToken);
 
-            HttpResponseMessage response = await httpClient.GetAsync("http://localhost:7000/api/halkbank/bakiye/3000");
+            HttpResponseMessage response = await httpClient.GetAsync("https://localhost:7000/api/halkbank/bakiye/3000");
 
             if (response.IsSuccessStatusCode)
             {
