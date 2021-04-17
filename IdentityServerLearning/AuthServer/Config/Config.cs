@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Security.Claims;
+using IdentityServer4;
 using IdentityServer4.Models;
 using IdentityServer4.Test;
 
@@ -51,6 +52,16 @@ namespace AuthServer.Config
                     ClientSecrets = { new Secret("halkbank".Sha256()) },
                     AllowedGrantTypes = { GrantType.ClientCredentials },
                     AllowedScopes = { "HalkBank.Write", "HalkBank.Read" }
+                },
+                new Client
+                {
+                    ClientId = "OnlineBankamatik",
+                    ClientName = "OnlineBankamatik",
+                    ClientSecrets = { new Secret("onlinebankamatik".Sha256()) },
+                    AllowedGrantTypes = GrantTypes.Hybrid,
+                    AllowedScopes = { IdentityServerConstants.StandardScopes.OpenId, IdentityServerConstants.StandardScopes.Profile },
+                    RedirectUris = { "https://localhost:8000/signin-oidc" },
+                    RequirePkce = false
                 }
             };
         }
