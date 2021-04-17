@@ -27,12 +27,6 @@ namespace AuthServer
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "AuthServer", Version = "v1" });
-            });
-
             services.AddIdentityServer()
                 .AddInMemoryApiResources(Config.Config.GetApiResources())
                 .AddInMemoryApiScopes(Config.Config.GetApiScopes())
@@ -40,13 +34,6 @@ namespace AuthServer
                 .AddTestUsers(Config.Config.GetTestUsers().ToList())
                 .AddInMemoryIdentityResources(Config.Config.GetIdentityResources())
                 .AddDeveloperSigningCredential();
-
-            // Following code solve Chrome same site issue
-            services.AddAuthentication("MyCookie")
-                .AddCookie("MyCookie", options =>
-                {
-                    options.Cookie.SameSite = SameSiteMode.Lax;
-                });
 
             services.AddControllersWithViews();
         }
@@ -57,13 +44,10 @@ namespace AuthServer
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "AuthServer v1"));
             }
 
             app.UseRouting();
             app.UseStaticFiles();
-            app.UseCookiePolicy();
             app.UseAuthentication();
             app.UseAuthorization();
 
@@ -72,11 +56,6 @@ namespace AuthServer
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapDefaultControllerRoute();
-            });
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
             });
         }
     }

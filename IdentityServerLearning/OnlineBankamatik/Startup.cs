@@ -22,22 +22,21 @@ namespace OnlineBankamatik
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
-
             services.AddAuthentication(_ =>
             {
                 _.DefaultScheme = "OnlineBankamatikCookie";
                 _.DefaultChallengeScheme = "oidc";
             })
-            .AddCookie("OnlineBankamatikCookie")
-            .AddOpenIdConnect("oidc", _ =>
-            {
-                _.SignInScheme = "OnlineBankamatikCookie";
-                _.Authority = "https://localhost:5000";
-                _.ClientId = "OnlineBankamatik";
-                _.ClientSecret = "onlinebankamatik";
-                _.ResponseType = "code id_token";
-            });
+           .AddCookie("OnlineBankamatikCookie")
+           .AddOpenIdConnect("oidc", _ =>
+           {
+               _.SignInScheme = "OnlineBankamatikCookie";
+               _.Authority = "https://localhost:5000";
+               _.ClientId = "OnlineBankamatik";
+               _.ClientSecret = "onlinebankamatik";
+               _.ResponseType = "code id_token";
+           });
+            services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,22 +46,14 @@ namespace OnlineBankamatik
             {
                 app.UseDeveloperExceptionPage();
             }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
-            }
             app.UseStaticFiles();
-
             app.UseRouting();
-
             app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute("Default", "{controller=Bankamatik}/{action=Index}");
             });
         }
     }
