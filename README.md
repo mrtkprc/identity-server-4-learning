@@ -8,7 +8,7 @@ To determine usable endpoints in IdentityServer, `/.well-known/openid-configurat
 
 To retrieve acces token: 
 
-`"token_endpoint": "http://localhost:5000/connect/token"`
+`"token_endpoint": "https://localhost:5000/connect/token"`
 
 `/.well-known/openid-configuration` shows supported scopes.
 "scopes_supported": [
