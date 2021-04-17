@@ -59,9 +59,13 @@ namespace AuthServer.Config
                     ClientName = "OnlineBankamatik",
                     ClientSecrets = { new Secret("onlinebankamatik".Sha256()) },
                     AllowedGrantTypes = GrantTypes.Hybrid,
-                    AllowedScopes = { IdentityServerConstants.StandardScopes.OpenId, IdentityServerConstants.StandardScopes.Profile },
+                    AllowedScopes = { IdentityServerConstants.StandardScopes.OpenId, IdentityServerConstants.StandardScopes.Profile, IdentityServerConstants.StandardScopes.OfflineAccess },
                     RedirectUris = { "https://localhost:8000/signin-oidc" },
-                    RequirePkce = false
+                    RequirePkce = false,
+                    AllowOfflineAccess = true,
+                    RefreshTokenUsage = TokenUsage.OneTimeOnly,
+                    RefreshTokenExpiration = TokenExpiration.Absolute,
+                    AbsoluteRefreshTokenLifetime = 2 * 60 * 60 + (10 * 60)
                 }
             };
         }

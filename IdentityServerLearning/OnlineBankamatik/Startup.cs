@@ -35,6 +35,8 @@ namespace OnlineBankamatik
                _.ClientId = "OnlineBankamatik";
                _.ClientSecret = "onlinebankamatik";
                _.ResponseType = "code id_token";
+               _.SaveTokens = true;
+               _.Scope.Add("offline_access");
            });
             services.AddControllersWithViews();
         }
