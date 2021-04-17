@@ -1,5 +1,7 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -35,7 +37,18 @@ namespace AuthServer
                 .AddInMemoryApiResources(Config.Config.GetApiResources())
                 .AddInMemoryApiScopes(Config.Config.GetApiScopes())
                 .AddInMemoryClients(Config.Config.GetClients())
+                .AddTestUsers(Config.Config.GetTestUsers().ToList())
+                .AddInMemoryIdentityResources(Config.Config.GetIdentityResources())
                 .AddDeveloperSigningCredential();
+
+            // Following code solve Chrome same site issue
+            services.AddAuthentication("MyCookie")
+                .AddCookie("MyCookie", options =>
+                {
+                    options.Cookie.SameSite = SameSiteMode.Lax;
+                });
+
+            services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,9 +62,17 @@ namespace AuthServer
             }
 
             app.UseRouting();
-
-            app.UseIdentityServer(); //This should be preceded from UseAuthorization.
+            app.UseStaticFiles();
+            app.UseCookiePolicy();
+            app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseIdentityServer();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapDefaultControllerRoute();
+            });
 
             app.UseEndpoints(endpoints =>
             {
