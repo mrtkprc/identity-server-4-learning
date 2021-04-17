@@ -36,7 +36,7 @@ namespace HalkbankAPI
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
                 {
-                    options.Authority = "http://localhost:5000";
+                    options.Authority = "https://localhost:5000";
                     options.Audience = "HalkBank";
                     options.RequireHttpsMetadata = false;
                 });
