@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31129.286
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthServer", "AuthServer\AuthServer.csproj", "{26E8E23A-552A-403E-81C7-4B604E9B70D1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthServer", "AuthServer\AuthServer.csproj", "{26E8E23A-552A-403E-81C7-4B604E9B70D1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarantiAPI", "GarantiAPI\GarantiAPI.csproj", "{6EB72039-E690-4A94-9C91-7F4B9F8CBE7C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GarantiAPI", "GarantiAPI\GarantiAPI.csproj", "{6EB72039-E690-4A94-9C91-7F4B9F8CBE7C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HalkbankAPI", "HalkbankAPI\HalkbankAPI.csproj", "{905DE9A5-0326-4A0B-84E7-8E810D0E59C7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HalkbankAPI", "HalkbankAPI\HalkbankAPI.csproj", "{905DE9A5-0326-4A0B-84E7-8E810D0E59C7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineBankamatik", "OnlineBankamatik\OnlineBankamatik.csproj", "{14AECEBC-BDD5-429E-87D4-0B03F976D94D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{905DE9A5-0326-4A0B-84E7-8E810D0E59C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{905DE9A5-0326-4A0B-84E7-8E810D0E59C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{905DE9A5-0326-4A0B-84E7-8E810D0E59C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14AECEBC-BDD5-429E-87D4-0B03F976D94D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14AECEBC-BDD5-429E-87D4-0B03F976D94D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14AECEBC-BDD5-429E-87D4-0B03F976D94D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14AECEBC-BDD5-429E-87D4-0B03F976D94D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
