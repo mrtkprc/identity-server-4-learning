@@ -37,6 +37,8 @@ namespace OnlineBankamatik
                _.ResponseType = "code id_token";
                _.SaveTokens = true;
                _.Scope.Add("offline_access");
+               _.Scope.Add("Garanti.Write");
+               _.Scope.Add("Garanti.Read");
            });
             services.AddControllersWithViews();
         }
