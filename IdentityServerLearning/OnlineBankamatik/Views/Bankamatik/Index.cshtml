@@ -1,8 +1,6 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
-
-<div class="text-center">
-    <h1>Bankamatik Page - Index</h1>
-    <h2><a asp-controller="Bankamatik" asp-action="OdemeYap" >Odeme Yap</a></h2>
-</div>
+﻿
+<br />
+<a asp-action="OdemeYap">Ödeme Yapmak İçin Tıklayınız.</a> |
+<a asp-action="BakiyeGor" asp-controller="Bakiye">Bakiye Gör</a> |
+<a asp-action="HareketDokumu" asp-controller="Bakiye">Hareket Dökümü</a> |
+<a asp-action="CiktiAl" asp-controller="Bakiye">Çıktı Al</a>
