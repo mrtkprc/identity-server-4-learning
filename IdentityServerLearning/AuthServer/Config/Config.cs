@@ -66,7 +66,8 @@ namespace AuthServer.Config
                         "Garanti.Read" ,
                         "PositionAndAuthority",
                         "Roles",
-                        "UserInfo"
+                        "UserInfo",
+                        "GobekAdi"
                     },
                     RedirectUris = { "https://localhost:8000/signin-oidc" },
                     RequirePkce = false,
@@ -92,7 +93,7 @@ namespace AuthServer.Config
                     Claims = {
                         new Claim("name","test user1"),
                         new Claim("given_name","test user1 given"),
-                        new Claim("website","https://wwww.testuser1.com"),
+                         new Claim("website","https://wwww.testuser1.com"),
                         new Claim("gender","1"),
                         new Claim("position" , "Test User 1"),
                         new Claim("authority", "Test 1"),
@@ -139,6 +140,12 @@ namespace AuthServer.Config
                     DisplayName = "User Info",
                     Description = "Kullanıcı bilgileri",
                     UserClaims = { "name", "website" }
+                 },
+                 new IdentityResource{
+                    Name = "GobekAdi",
+                    DisplayName = "Gobek adı",
+                    Description = "Göbek adı",
+                    UserClaims = { "gobekadi" }
                  }
 
             };

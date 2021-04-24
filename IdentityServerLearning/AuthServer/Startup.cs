@@ -33,7 +33,8 @@ namespace AuthServer
                 .AddInMemoryClients(Config.Config.GetClients())
                 .AddTestUsers(Config.Config.GetTestUsers().ToList())
                 .AddInMemoryIdentityResources(Config.Config.GetIdentityResources())
-                .AddDeveloperSigningCredential();
+                .AddDeveloperSigningCredential()
+                .AddProfileService<CustomProfileService>();
 
             services.AddControllersWithViews();
         }

@@ -58,7 +58,10 @@ namespace OnlineBankamatik
                {
                    RoleClaimType = "role"
                };
-            
+
+               _.Scope.Add("GobekAdi");
+               _.ClaimActions.MapUniqueJsonKey("gobekadi", "gobekadi");
+
            });
             services.AddHttpClient();
             services.AddControllersWithViews();
