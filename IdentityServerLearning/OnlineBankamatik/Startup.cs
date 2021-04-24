@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.IdentityModel.Tokens;
 
 namespace OnlineBankamatik
 {
@@ -28,7 +29,7 @@ namespace OnlineBankamatik
                 _.DefaultScheme = "OnlineBankamatikCookie";
                 _.DefaultChallengeScheme = "oidc";
             })
-           .AddCookie("OnlineBankamatikCookie")
+           .AddCookie("OnlineBankamatikCookie", options => options.AccessDeniedPath = "/home/accessdenied")
            .AddOpenIdConnect("oidc", _ =>
            {
                _.SignInScheme = "OnlineBankamatikCookie";
@@ -36,14 +37,30 @@ namespace OnlineBankamatik
                _.ClientId = "OnlineBankamatik";
                _.ClientSecret = "onlinebankamatik";
                _.ResponseType = "code id_token";
+               _.GetClaimsFromUserInfoEndpoint = true;
+
                _.SaveTokens = true;
                _.Scope.Add("offline_access");
+
                _.Scope.Add("Garanti.Write");
                _.Scope.Add("Garanti.Read");
                _.Scope.Add("PositionAndAuthority");
                _.ClaimActions.MapUniqueJsonKey("position", "position");
                _.ClaimActions.MapUniqueJsonKey("authority", "authority");
+
+               _.Scope.Add("UserInfo");
+               _.ClaimActions.MapUniqueJsonKey("name", "name");
+               _.ClaimActions.MapUniqueJsonKey("website", "website");
+
+               _.Scope.Add("Roles");
+               _.ClaimActions.MapUniqueJsonKey("role", "role");
+               _.TokenValidationParameters = new TokenValidationParameters
+               {
+                   RoleClaimType = "role"
+               };
+            
            });
+            services.AddHttpClient();
             services.AddControllersWithViews();
         }
 

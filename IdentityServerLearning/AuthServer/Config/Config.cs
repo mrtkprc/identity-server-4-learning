@@ -64,7 +64,9 @@ namespace AuthServer.Config
                         IdentityServerConstants.StandardScopes.OfflineAccess,
                         "Garanti.Write", 
                         "Garanti.Read" ,
-                        "PositionAndAuthority"
+                        "PositionAndAuthority",
+                        "Roles",
+                        "UserInfo"
                     },
                     RedirectUris = { "https://localhost:8000/signin-oidc" },
                     RequirePkce = false,
@@ -88,10 +90,12 @@ namespace AuthServer.Config
                     Password = "12345",
                     Claims = {
                         new Claim("name","test user1"),
+                        new Claim("given_name","test user1 given"),
                         new Claim("website","https://wwww.testuser1.com"),
                         new Claim("gender","1"),
                         new Claim("position" , "Test User 1"),
-                        new Claim("authority", "Test 1")
+                        new Claim("authority", "Test 1"),
+                        new Claim("role", "admin")
                     }
                 },
                 new TestUser {
@@ -103,7 +107,8 @@ namespace AuthServer.Config
                         new Claim("website","https://wwww.testuser2.com"),
                         new Claim("gender","0"),
                         new Claim("position" , "Test User 2"),
-                        new Claim("authority", "Test 2")
+                        new Claim("authority", "Test 2"),
+                        new Claim("role", "moderator")
                     }
                 }
             };
@@ -121,7 +126,20 @@ namespace AuthServer.Config
                     DisplayName = "Position And Authority",
                     Description = "Position and Authorization of User.",
                     UserClaims = { "position", "authority" }
-                }
+                },
+                 new IdentityResource {
+                    Name = "Roles",
+                    DisplayName = "Roles",
+                    Description = "Kullanıcı rolleri",
+                    UserClaims = { "role" }
+                 },
+                 new IdentityResource {
+                    Name = "UserInfo",
+                    DisplayName = "User Info",
+                    Description = "Kullanıcı bilgileri",
+                    UserClaims = { "name", "website" }
+                 }
+
             };
         }
 
