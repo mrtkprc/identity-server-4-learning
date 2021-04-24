@@ -74,8 +74,9 @@ namespace AuthServer.Config
                     RefreshTokenUsage = TokenUsage.OneTimeOnly,
                     RefreshTokenExpiration = TokenExpiration.Absolute,
                     AbsoluteRefreshTokenLifetime = 2 * 60 * 60 + (10 * 60),
-                    RequireConsent = true
-                    
+                    RequireConsent = true,
+                    PostLogoutRedirectUris = { "https://localhost:8000/signout-callback-oidc" }
+
                 }
             };
         }

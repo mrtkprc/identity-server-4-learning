@@ -63,5 +63,11 @@ namespace OnlineBankamatik.Controllers
             IOrderedEnumerable<KeyValuePair<string, string>> properties = authenticateResult.Properties.Items.OrderBy(p => p.Key);
             return View(properties);
         }
+
+        public async Task Logout()
+        {
+            await HttpContext.SignOutAsync("OnlineBankamatikCookie");
+            await HttpContext.SignOutAsync("oidc");
+        }
     }
 }
