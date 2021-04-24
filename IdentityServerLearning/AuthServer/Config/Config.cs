@@ -59,8 +59,13 @@ namespace AuthServer.Config
                     ClientName = "OnlineBankamatik",
                     ClientSecrets = { new Secret("onlinebankamatik".Sha256()) },
                     AllowedGrantTypes = GrantTypes.Hybrid,
-                    AllowedScopes = { IdentityServerConstants.StandardScopes.OpenId, IdentityServerConstants.StandardScopes.Profile, 
-                        IdentityServerConstants.StandardScopes.OfflineAccess,"Garanti.Write", "Garanti.Read" },
+                    AllowedScopes = { IdentityServerConstants.StandardScopes.OpenId, 
+                        IdentityServerConstants.StandardScopes.Profile, 
+                        IdentityServerConstants.StandardScopes.OfflineAccess,
+                        "Garanti.Write", 
+                        "Garanti.Read" ,
+                        "PositionAndAuthority"
+                    },
                     RedirectUris = { "https://localhost:8000/signin-oidc" },
                     RequirePkce = false,
                     AllowOfflineAccess = true,
@@ -84,7 +89,9 @@ namespace AuthServer.Config
                     Claims = {
                         new Claim("name","test user1"),
                         new Claim("website","https://wwww.testuser1.com"),
-                        new Claim("gender","1")
+                        new Claim("gender","1"),
+                        new Claim("position" , "Test User 1"),
+                        new Claim("authority", "Test 1")
                     }
                 },
                 new TestUser {
@@ -94,7 +101,9 @@ namespace AuthServer.Config
                     Claims = {
                         new Claim("name","test user2"),
                         new Claim("website","https://wwww.testuser2.com"),
-                        new Claim("gender","0")
+                        new Claim("gender","0"),
+                        new Claim("position" , "Test User 2"),
+                        new Claim("authority", "Test 2")
                     }
                 }
             };
@@ -105,7 +114,14 @@ namespace AuthServer.Config
             return new List<IdentityResource>
             {
                 new IdentityResources.OpenId(),
-                new IdentityResources.Profile()
+                new IdentityResources.Profile(),
+                new IdentityResource
+                {
+                    Name = "PositionAndAuthority",
+                    DisplayName = "Position And Authority",
+                    Description = "Position and Authorization of User.",
+                    UserClaims = { "position", "authority" }
+                }
             };
         }
 

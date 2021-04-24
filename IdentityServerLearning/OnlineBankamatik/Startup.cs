@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
 
 namespace OnlineBankamatik
 {
@@ -39,6 +40,9 @@ namespace OnlineBankamatik
                _.Scope.Add("offline_access");
                _.Scope.Add("Garanti.Write");
                _.Scope.Add("Garanti.Read");
+               _.Scope.Add("PositionAndAuthority");
+               _.ClaimActions.MapUniqueJsonKey("position", "position");
+               _.ClaimActions.MapUniqueJsonKey("authority", "authority");
            });
             services.AddControllersWithViews();
         }
