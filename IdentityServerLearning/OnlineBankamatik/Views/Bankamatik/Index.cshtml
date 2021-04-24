@@ -1,6 +1,10 @@
-﻿
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@User.Claims.FirstOrDefault(c => c.Type == "name")?.Value
+@User.Claims.FirstOrDefault(c => c.Type == "role")?.Value
+
 <br />
 <a asp-action="OdemeYap">Ödeme Yapmak İçin Tıklayınız.</a> |
 <a asp-action="BakiyeGor" asp-controller="Bakiye">Bakiye Gör</a> |
 <a asp-action="HareketDokumu" asp-controller="Bakiye">Hareket Dökümü</a> |
-<a asp-action="CiktiAl" asp-controller="Bakiye">Çıktı Al</a>
+<a asp-action="CiktiAl" asp-controller="Bakiye">Çıktı Al</a> |
+<a asp-action="Logout" asp-controller="Auth">Logout</a> |
