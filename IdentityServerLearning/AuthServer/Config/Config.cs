@@ -70,13 +70,13 @@ namespace AuthServer.Config
                         "GobekAdi"
                     },
                     RedirectUris = { "https://localhost:8000/signin-oidc" },
-                    RequirePkce = false,
                     AllowOfflineAccess = true,
                     RefreshTokenUsage = TokenUsage.OneTimeOnly,
                     RefreshTokenExpiration = TokenExpiration.Absolute,
                     AbsoluteRefreshTokenLifetime = 2 * 60 * 60 + (10 * 60),
                     RequireConsent = true,
-                    PostLogoutRedirectUris = { "https://localhost:8000/signout-callback-oidc" }
+                    PostLogoutRedirectUris = { "https://localhost:8000/signout-callback-oidc" },
+                    RequirePkce = true
 
                 }
             };
