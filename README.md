@@ -1,3 +1,9 @@
+**Acknowledgement**
+
+This repository is composed of notes of Gencay Yildiz. Related link is following.
+
+[Article series of IdentityServer4 of Gencay Yildiz](https://www.gencayyildiz.com/blog/category/identityserver4/)
+
 # identity-server-4-learning
 Identity Server 4 Learning Notes
 
