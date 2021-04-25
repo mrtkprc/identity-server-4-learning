@@ -78,6 +78,10 @@ public static IEnumerable<Client> GetClients() =>
     };
 ```
 
+## Resource Owner Credential (Lesson-22)
+
+If you prefer SPA such as React, you can develop Auth API Service between client and auth server.
+
 ## Persitable Data Storage (Lesson-23)
 
 ### Adjustment of services.
