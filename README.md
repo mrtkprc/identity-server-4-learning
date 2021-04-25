@@ -22,3 +22,94 @@ To retrieve acces token:
 ## Introspect Endpoint
 
 Endpoint `/connect/introspect` can be used to see token status and scopes.
+
+## Persitable Data Storage (Lesson-23)
+
+### Adjustment of services.
+```c#
+public class Startup
+{
+    public void ConfigureServices(IServiceCollection services)
+    {
+ 
+        services.AddIdentityServer()
+            .AddConfigurationStore(options =>
+            {
+                options.ConfigureDbContext = builder =>
+                    builder.UseSqlServer("Server=.;Database=AuthServerDB;Trusted_Connection=True;",
+                        sqlOptions => sqlOptions.MigrationsAssembly(typeof(Startup).GetTypeInfo().Assembly.GetName().Name));
+            })
+            .AddOperationalStore(options =>
+            {
+                options.ConfigureDbContext = builder =>
+                    builder.UseSqlServer("Server=.;Database=AuthServerDB;Trusted_Connection=True;",
+                        sqlOptions => sqlOptions.MigrationsAssembly(typeof(Startup).GetTypeInfo().Assembly.GetName().Name));
+            })
+            .AddDeveloperSigningCredential();
+            .
+            .
+            .
+    }
+    .
+    .
+    .
+}
+```
+
+### Seed Configuration
+
+```c#
+public static class SeedData
+{
+    public static void Seed(ConfigurationDbContext context)
+    {
+        if (!context.Clients.Any())
+            foreach (var client in Config.GetClients())
+                context.Clients.Add(client.ToEntity());
+ 
+        if (!context.ApiResources.Any())
+            foreach (var apiResource in Config.GetApiResources())
+                context.ApiResources.Add(apiResource.ToEntity());
+ 
+        if (!context.ApiScopes.Any())
+            foreach (var scope in Config.GetApiScopes())
+                context.ApiScopes.Add(scope.ToEntity());
+ 
+        if (!context.IdentityResources.Any())
+            foreach (var identityResource in Config.GetIdentityResources())
+                context.IdentityResources.Add(identityResource.ToEntity());
+ 
+        context.SaveChanges();
+    }
+}
+```
+
+### Inject data
+
+```c#
+public class Program
+{
+    public static void Main(string[] args)
+    {
+        var host = CreateHostBuilder(args).Build();
+        using var serviceScope = host.Services.CreateScope();
+        var services = serviceScope.ServiceProvider;
+        var context = services.GetRequiredService<ConfigurationDbContext>();
+        SeedData.Seed(context);
+        host.Run();
+    }
+ 
+    public static IHostBuilder CreateHostBuilder(string[] args) =>
+        Host.CreateDefaultBuilder(args)
+            .ConfigureWebHostDefaults(webBuilder =>
+            {
+                webBuilder.UseStartup<Startup>();
+            });
+}
+```
+
+### Apply migration and creating database
+
+`dotnet ef migrations add mig_1 -c ConfigurationDbContext`
+
+`dotnet ef database update -c ConfigurationDbContext` 
