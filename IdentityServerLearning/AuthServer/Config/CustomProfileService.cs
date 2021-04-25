@@ -17,6 +17,7 @@ public class CustomProfileService : IProfileService
             new Claim(JwtRegisteredClaimNames.Email, "gncy@gencayyildiz.com"),
             new Claim(JwtRegisteredClaimNames.Website,"https://www.gencayyildiz.com"),
             new Claim("gobekadi", "Ali"),
+            new Claim("name",context.Subject.Identity.Name),
             new Claim("role", "admin") // for Role based authorization
         };
 
