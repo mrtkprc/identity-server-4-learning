@@ -4,7 +4,7 @@ Identity Server 4 Learning Notes
 
 ## IdentityServer and Angular App Notes
 
-[oidc](https://www.npmjs.com/package/oidc-client)
+Angular uses npm package [oidc](https://www.npmjs.com/package/oidc-client)
 
 ### `GetClients` Configuration
 
